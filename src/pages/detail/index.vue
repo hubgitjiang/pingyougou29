@@ -14,11 +14,29 @@
       <div class="mess">
         <div class="word">婴儿床杆子圆床通用支架挂杆两用杆实木杆遮光杆支架遮光架婴儿床杆子圆床通用支架挂杆两用杆实木杆遮光杆支架遮光架</div>
         <div class="shoucang">
-          <span>星</span>
+          <span class="iconfont iconshoucang"></span>
           <span>收藏</span>
         </div>
       </div>
       <div class="pass">快递：免运费</div>
+    </div>
+    <!-- 图文介绍 -->
+    <div class="jieshao">
+      <div class="title">图文介绍</div>
+      <div class="msg"></div>
+    </div>
+    <!-- bottomtab -->
+    <div class="bottom">
+      <div class="callme">
+        <span class="iconfont icontongyong-lianxikefutubiao"></span>
+        <span>联系客服</span>
+      </div>
+      <div class="cart">
+        <span class="iconfont icongouwuche"></span>
+        <span>购物车</span>
+      </div>
+      <div class="incart">加入购物车</div>
+      <div class="buy">立即购买</div>
     </div>
   </div>
 </template>
