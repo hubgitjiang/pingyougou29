@@ -80,6 +80,7 @@
   color: #999;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
 }
 .bottom .incart,
 .bottom .buy {

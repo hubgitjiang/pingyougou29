@@ -2,17 +2,17 @@
   <div>
     <!-- 轮播图 -->
     <swiper class="lunbo" indicator-dots autoplay>
-      <block v-for="(item, index) in imgList" :key="index">
+      <block v-for="(item, index) in detailObj.pics" :key="index">
         <swiper-item>
-          <image :src="item" class="slide-image" mode="aspcetFill" />
+          <image :src="item.pics_big" class="slide-image" mode="aspcetFill" />
         </swiper-item>
       </block>
     </swiper>
     <!-- 商品信息 -->
     <div class="box">
-      <div class="price">￥279</div>
+      <div class="price">￥{{detailObj.goods_price}}</div>
       <div class="mess">
-        <div class="word">婴儿床杆子圆床通用支架挂杆两用杆实木杆遮光杆支架遮光架婴儿床杆子圆床通用支架挂杆两用杆实木杆遮光杆支架遮光架</div>
+        <div class="word">{{detailObj.goods_name}}</div>
         <div class="shoucang">
           <span class="iconfont iconshoucang"></span>
           <span>收藏</span>
@@ -23,7 +23,7 @@
     <!-- 图文介绍 -->
     <div class="jieshao">
       <div class="title">图文介绍</div>
-      <div class="msg"></div>
+      <div class="msg" v-html="detailObj.goods_introduce"></div>
     </div>
     <!-- bottomtab -->
     <div class="bottom">
@@ -42,14 +42,23 @@
 </template>
 
 <script>
+// 引入 request 
+import request from '../../utils/request.js'
 export default {
   data() {
     return {
-      imgList: [
-        "https://img.alicdn.com/tps/i3/TB2EDmkqv9TBuNjy0FcXXbeiFXa_!!0-juitemmedia.jpg_180x180q90.jpg_.webp",
-        "https://gma.alicdn.com/bao/uploaded/i1/31432549/O1CN01itOM061UhU4bRirMM_!!0-saturn_solar.jpg_200x200.jpg_.webp"
-      ]
+      detailObj: {}
     }
+  },
+  async mounted() {
+    // 接收参数
+    var goods_id = this.$root.$mp.query.id
+    var url = 'https://itjustfun.cn/api/public/v1/goods/detail'
+    var res = await request.get(url, {
+      goods_id: goods_id
+    })
+    this.detailObj = res.data.data
+    console.log(res.data.data)
   }
 }
 </script>
