@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -45,6 +45,13 @@
 					"name": "searchlist",
 					"pathName": "pages/searchlist/main",
 					"query": "query=曲面电视",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "detail",
+					"pathName": "pages/detail/main",
+					"query": "id=43982",
 					"scene": null
 				}
 			]

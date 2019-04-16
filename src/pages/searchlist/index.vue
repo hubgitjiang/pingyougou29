@@ -34,7 +34,6 @@
     </div>
   </div>
 </template>
-
 <script>
 // 引入 request 
 import request from '../../utils/request.js'
