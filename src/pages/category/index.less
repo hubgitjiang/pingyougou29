@@ -1,0 +1,82 @@
+page {
+    padding-top: 100rpx;
+}
+.mytop {
+    width: 100%;
+    height: 100rpx;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.content {
+    display: flex;
+    position: absolute;
+    top: 100rpx;
+    bottom: 0rpx;
+    left: 0rpx;
+    .nav {
+        height: 100%;
+        overflow: auto;
+        width: 200rpx;
+        background-color: #f4f4f4;
+        .nav-item {
+            height: 100rpx;
+            line-height: 100rpx;
+            text-align: center;
+        }
+        .active {
+            background-color: #fff;
+            color: #eb4450;
+            position: relative;
+            &:before {
+                position: absolute;
+                top: 20rpx;
+                left: 0rpx;
+                content: '';
+                width: 8rpx;
+                height: 60rpx;
+                background-color: #eb4450;
+            }
+        }
+    }
+    .goods {
+        height: 100%;
+        overflow: auto;
+        flex: 1;
+        padding: 20rpx 16rpx;
+        .topimg {
+            width: 100%;
+            height: 180rpx;
+        }
+        .list {
+            .title {
+                text-align: center;
+                height: 130rpx;
+                line-height: 130rpx;
+                span {
+                    color: #ededed;
+                    margin: 0 20rpx;
+                }
+            }
+            .item-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                .item {
+                    width: 30%;
+                    text-align: center;
+                    margin-bottom: 20rpx;
+                    image {
+                        width: 80%;
+                        height: 60rpx;
+                    }
+                    span {
+                        font-size: 14px;
+                        line-height: 65rpx;
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+page {
+  padding-top: 100rpx;
+}
+.mytop {
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.content {
+  display: flex;
+  position: absolute;
+  top: 100rpx;
+  bottom: 0rpx;
+  left: 0rpx;
+}
+.content .nav {
+  height: 100%;
+  overflow: auto;
+  width: 200rpx;
+  background-color: #f4f4f4;
+}
+.content .nav .nav-item {
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+.content .nav .active {
+  background-color: #fff;
+  color: #eb4450;
+  position: relative;
+}
+.content .nav .active:before {
+  position: absolute;
+  top: 20rpx;
+  left: 0rpx;
+  content: '';
+  width: 8rpx;
+  height: 60rpx;
+  background-color: #eb4450;
+}
+.content .goods {
+  height: 100%;
+  overflow: auto;
+  flex: 1;
+  padding: 20rpx 16rpx;
+}
+.content .goods .topimg {
+  width: 100%;
+  height: 180rpx;
+}
+.content .goods .list .title {
+  text-align: center;
+  height: 130rpx;
+  line-height: 130rpx;
+}
+.content .goods .list .title span {
+  color: #ededed;
+  margin: 0 20rpx;
+}
+.content .goods .list .item-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.content .goods .list .item-list .item {
+  width: 30%;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.content .goods .list .item-list .item image {
+  width: 80%;
+  height: 60rpx;
+}
+.content .goods .list .item-list .item span {
+  font-size: 14px;
+  line-height: 65rpx;
+  display: block;
+}
