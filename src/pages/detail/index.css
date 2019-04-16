@@ -40,11 +40,19 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .box .mess .shoucang span {
   text-align: center;
   font-size: 14px;
   color: #999;
+}
+.box .mess .shoucang .mybtn {
+  position: absolute;
+  top: 25rpx;
+  left: 35rpx;
+  height: 50rpx;
+  opacity: 0;
 }
 .box .pass {
   height: 100rpx;

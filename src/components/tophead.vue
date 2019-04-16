@@ -1,5 +1,5 @@
 <template>
-    <div class="search">
+    <a class="search" href="/pages/search/main">
         <div class="serach_input">
             <input type="text">
             <div class="word">
@@ -7,7 +7,7 @@
                 <span>搜索</span>
             </div>
         </div>
-    </div>
+    </a>
 </template>
 
 <script>

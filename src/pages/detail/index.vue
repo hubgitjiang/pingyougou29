@@ -15,7 +15,9 @@
         <div class="word">{{detailObj.goods_name}}</div>
         <div class="shoucang">
           <span class="iconfont iconshoucang"></span>
-          <span>收藏</span>
+          <span>分享
+          </span>
+          <button class="mybtn" open-type="share"></button>
         </div>
       </div>
       <div class="pass">快递：免运费</div>
@@ -30,6 +32,7 @@
       <div class="callme">
         <span class="iconfont icontongyong-lianxikefutubiao"></span>
         <span>联系客服</span>
+        <button open-type="contact"></button>
       </div>
       <div class="cart">
         <span class="iconfont icongouwuche"></span>
@@ -47,18 +50,31 @@ import request from '../../utils/request.js'
 export default {
   data() {
     return {
-      detailObj: {}
+      detailObj: {},
+      goods_id: ''
+    }
+  },
+  methods: {
+    aa() {
+      wx.showShareMenu()
     }
   },
   async mounted() {
     // 接收参数
-    var goods_id = this.$root.$mp.query.id
+    this.goods_id = this.$root.$mp.query.id
     var url = 'https://itjustfun.cn/api/public/v1/goods/detail'
     var res = await request.get(url, {
-      goods_id: goods_id
+      goods_id: this.goods_id
     })
     this.detailObj = res.data.data
     console.log(res.data.data)
+  },
+  onShareAppMessage(res) {
+    return {
+      title: '震惊-据专家研究得到，烧开的水不能直接饮用',
+      path: '/pages/detail/main?goods_id=' + this.goods_id,
+      imageUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4116997908,4289274602&fm=173&app=49&f=JPEG?w=218&h=146&s=DA2382457C36780D5522D57203009031'
+    }
   }
 }
 </script>
