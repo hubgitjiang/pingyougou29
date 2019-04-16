@@ -7,3 +7,42 @@
 	2.2 查看当前项目状态： git status
 	2.3 将没有添加的文件进行 add: git add .
 	2.4 将文件提交到本地仓库（版本库）： git commit -m '完成了首页&分类&搜索列表'
+	2.5 建立远程仓库：
+		github git@github.com:hubgitjiang/pingyougou29.git
+		码云：
+	2.6 将运程仓库与本地进行链接： git remote add origin git@github.com:hubgitjiang/pingyougou29.git
+	2.7 与运程的 master 建立联系： git push -u origin master
+3.0 将搜索列表进行完善:
+	3.1 上拉加载完所有数据后，需要停止发送请求：
+		设置一个开关	
+	3.2 给所有的异步请求添加一个加载动画
+	3.3 设置下拉刷新：
+		问题：头部会遮住背景
+		解决方案：
+			当页面处于不滑动时，让头部不要固定定位
+			当页面一旦滑动，让头部设置为固定定位
+4.0 vue 生命周期：
+		beforeCarete
+		created
+		beforemount
+		mounted
+		beforeupdate
+		updated
+		beforedistroy
+		distroyed
+	小程序也有生命周期：
+		微信：
+			小程序：
+				onLauch: 当小程序加载时执行
+				onShow: 当小程序显示时执行
+			页面：
+				onLoad: 页面加载时执行
+				onReady: 当页面渲染时执行
+				onShow: 当页面显示时执行
+				onHide: 当页面隐藏时执行
+				ohUnload: 当页面卸载时执行
+5.0 商品详情：
+	5.1 设置入口
+	5.2 创建页面
+	5.3 书写静态页面
+	5.4 渲染动态数据

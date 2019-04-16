@@ -41,9 +41,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "searchlist",
 					"pathName": "pages/searchlist/main",
+					"query": "query=曲面电视",
 					"scene": null
 				}
 			]

@@ -1,5 +1,4 @@
 .mytop {
-  position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
@@ -37,7 +36,6 @@
   color: #eb4450;
 }
 .goodsList {
-  margin-top: 200rpx;
   padding: 0 20rpx;
 }
 .goodsList .item {

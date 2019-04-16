@@ -45,6 +45,7 @@ page {
   overflow: auto;
   flex: 1;
   padding: 20rpx 16rpx;
+  box-sizing: border-box;
 }
 .content .goods .topimg {
   width: 100%;

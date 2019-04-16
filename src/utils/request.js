@@ -1,6 +1,9 @@
 // 负责封装请求
 var request = function (url, method = "get", data = {}, header = {}) {
     return new Promise((resolve, reject) => {
+        wx.showLoading({
+            title: '数据加载中'
+        })
         // 执行逻辑
         wx.request({
             url: url,
@@ -8,6 +11,7 @@ var request = function (url, method = "get", data = {}, header = {}) {
             data: data,
             header: header,
             success: (res) => {
+                wx.hideLoading()
                 // this 的指向
                 resolve(res)
             },
