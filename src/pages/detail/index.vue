@@ -36,9 +36,9 @@
       </div>
       <div class="cart">
         <span class="iconfont icongouwuche"></span>
-        <span>购物车</span>
+        <span @click="toCart">购物车</span>
       </div>
-      <div class="incart">加入购物车</div>
+      <div class="incart" @click="addCart">加入购物车</div>
       <div class="buy">立即购买</div>
     </div>
   </div>
@@ -51,12 +51,36 @@ export default {
   data() {
     return {
       detailObj: {},
-      goods_id: ''
+      goods_id: '',
+      goodsList: {}, // 保存所有的购物车中的商品信息
     }
   },
   methods: {
     aa() {
       wx.showShareMenu()
+    },
+    // 跳转到购物车：
+    toCart() {
+      wx.switchTab({
+        url: '/pages/cart/main'
+      })
+    },
+    // 加入购物车的方法
+    addCart() {
+      // console.log(this.detailObj)
+      // 将当前商品信息保存起
+      this.goodsList[this.detailObj.goods_id] = this.detailObj
+      // 存储到 storage 中
+      try {
+        wx.setStorageSync('goods', this.goodsList)
+        wx.showToast({
+          title: '加入购物车成功',
+          icon: 'success',
+          duration: 2000
+        })
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   async mounted() {
@@ -67,7 +91,12 @@ export default {
       goods_id: this.goods_id
     })
     this.detailObj = res.data.data
-    console.log(res.data.data)
+    // 将购物车中原来的数据读取出来
+    try {
+      this.goodsList = wx.getStorageSync('goods') || {}
+    } catch (error) {
+      console.log(error) // log 将当前的异常信息保存到 log 中，log: 日志
+    }
   },
   onShareAppMessage(res) {
     return {

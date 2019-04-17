@@ -1,0 +1,125 @@
+.page {
+  padding-bottom: 100rpx;
+}
+.address {
+  border-bottom: 20rpx solid #f4f4f4;
+}
+.address .no-address {
+  display: flex;
+  padding: 0 20rpx;
+  justify-content: space-between;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.address .yes-address {
+  height: 200rpx;
+  padding: 0 20rpx;
+}
+.address .yes-address .uname {
+  display: flex;
+  justify-content: space-between;
+  line-height: 100rpx;
+}
+.address .img {
+  width: 100%;
+  height: 14rpx;
+  display: block;
+}
+.goodsList .title {
+  height: 88rpx;
+  line-height: 88rpx;
+  padding-left: 30rpx;
+  border-bottom: 1px solid #ddd;
+}
+.goodsList .item {
+  display: flex;
+}
+.goodsList .item .check {
+  width: 88rpx;
+  height: 205rpx;
+  text-align: center;
+  line-height: 205rpx;
+}
+.goodsList .item .goods {
+  flex: 1;
+  height: 205rpx;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+}
+.goodsList .item .goods .left {
+  width: 160rpx;
+}
+.goodsList .item .goods .left image {
+  margin-top: 22rpx;
+  width: 160rpx;
+  height: 160rpx;
+}
+.goodsList .item .goods .right .mess {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  padding: 20rpx 30rpx 0rpx;
+  font-size: 16px;
+}
+.goodsList .item .goods .right .pricenum {
+  padding: 40rpx 18rpx 0rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.goodsList .item .goods .right .pricenum .price {
+  color: red;
+}
+.goodsList .item .goods .right .pricenum .num {
+  display: flex;
+}
+.goodsList .item .goods .right .pricenum .num span {
+  border: 4px solid #666666;
+  width: 52rpx;
+  height: 42rpx;
+  text-align: center;
+  line-height: 42rpx;
+}
+.goodsList .item .goods .right .pricenum .num .index {
+  border: none;
+  line-height: 50rpx;
+}
+.total {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  font-size: 16px;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  background-color: #fff;
+}
+.total .check {
+  width: 88rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+}
+.total .word {
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+}
+.total .totalp {
+  flex: 3;
+  line-height: 50rpx;
+  text-align: center;
+}
+.total .totalp .top span {
+  color: red;
+}
+.total .pay {
+  flex: 2;
+}
+.total .pay button {
+  background: red;
+  color: #fff;
+  border-radius: 0px;
+}

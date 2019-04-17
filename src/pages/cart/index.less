@@ -1,0 +1,140 @@
+.page {
+    padding-bottom: 100rpx;
+}
+.address {
+    border-bottom: 20rpx solid #f4f4f4;
+    .no-address {
+        display: flex;
+        padding: 0 20rpx;
+        justify-content: space-between;
+        height: 100rpx;
+        line-height: 100rpx;
+        .word {
+
+        }
+        .iright {
+
+        }
+    }
+    .yes-address {
+        height: 200rpx;
+        padding: 0 20rpx;
+        .uname {
+            display: flex;
+            justify-content: space-between;
+            line-height: 100rpx;
+        }
+        .uadress {
+
+        }
+    }
+    .img {
+        width: 100%;
+        height: 14rpx;
+        display: block;
+    }
+}
+.goodsList {
+    .title {
+        height: 88rpx;
+        line-height: 88rpx;
+        padding-left: 30rpx;
+        border-bottom: 1px solid #ddd;
+    }
+    .item {
+        display: flex;
+        .check {
+            width: 88rpx;
+            height: 205rpx;
+            text-align: center;
+            line-height: 205rpx;
+        }
+        .goods {
+            flex: 1;
+            height: 205rpx;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            .left {
+                width: 160rpx;
+                image {
+                    margin-top: 22rpx;
+                    width: 160rpx;
+                    height: 160rpx;
+                }
+            }
+            .right {
+                .mess {
+                    overflow:hidden; 
+                    text-overflow:ellipsis;
+                    display:-webkit-box; 
+                    -webkit-box-orient:vertical;
+                    -webkit-line-clamp:2; 
+                    padding: 20rpx 30rpx 0rpx;
+                    font-size: 16px;
+                }
+                .pricenum {
+                    padding: 40rpx 18rpx 0rpx 30rpx;
+                    display: flex;
+                    justify-content: space-between;
+                    .price {
+                        color: red;
+                    }
+                    .num {
+                        display: flex;
+                        span {
+                            border: 4px solid #666666;
+                            width: 52rpx;
+                            height: 42rpx;
+                            text-align: center;
+                            line-height: 42rpx;
+                        }
+                        .index {
+                            border: none;
+                            line-height: 50rpx;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.total {
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    font-size: 16px;
+    position: fixed;
+    bottom: 0rpx;
+    left: 0rpx;
+    background-color: #fff;
+    .check {
+        width: 88rpx;
+        height: 100rpx;
+        text-align: center;
+        line-height: 100rpx;
+    }
+    .word {
+        width: 100rpx;
+        height: 100rpx;
+        text-align: center;
+        line-height: 100rpx;
+    }
+    .totalp {
+        flex: 3;
+        line-height: 50rpx;
+        text-align: center;
+        .top {
+            span {
+                color: red;
+            }
+        }
+    }
+    .pay {
+        flex: 2;
+        button {
+            background: red;
+            color: #fff;
+            border-radius: 0px;
+        }
+    }
+}

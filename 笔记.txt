@@ -61,3 +61,17 @@
             wx.clearStorage：会清除当前项目中所有的 storage 
             wx.removeStorage: 清除指定 key 对应的 storage
 5.0 数组中的去重： Set 对象
+6.0 购物车：
+    a. 设置一个入口位置
+    b. 完成静态页面
+    c. 选择收货地址
+        将收货地址相信息保存起来：wx.setStorageSync
+    d. 加入购物车
+        点击加入购物车按钮，将数据保存到一个位置：
+            stroage:
+            服务器：
+        d1. 当点击加入购物车时，将商品信息保存到 storage 中，
+        d2. 将来在购物车页面中再去 storage 中取出
+    e. 计算所有商品的总价格
+
+7.0 小程序中允许开发人员直接获取微信中的地址
