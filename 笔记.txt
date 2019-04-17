@@ -1,67 +1,63 @@
 1.0 今日内容：
-	a. 将搜索列表进行完善
-	b. 完成商品详情页面
-	c. 商品搜索页面
-2.0 将项目提交到 git 中
-	2.1 将项目进行 git 初始化: git init
-	2.2 查看当前项目状态： git status
-	2.3 将没有添加的文件进行 add: git add .
-	2.4 将文件提交到本地仓库（版本库）： git commit -m '完成了首页&分类&搜索列表'
-	2.5 建立远程仓库：
-		github git@github.com:hubgitjiang/pingyougou29.git
-		码云：
-	2.6 将运程仓库与本地进行链接： git remote add origin git@github.com:hubgitjiang/pingyougou29.git
-	2.7 与运程的 master 建立联系： git push -u origin master
-3.0 将搜索列表进行完善:
-	3.1 上拉加载完所有数据后，需要停止发送请求：
-		设置一个开关	
-	3.2 给所有的异步请求添加一个加载动画
-	3.3 设置下拉刷新：
-		问题：头部会遮住背景
-		解决方案：
-			当页面处于不滑动时，让头部不要固定定位
-			当页面一旦滑动，让头部设置为固定定位
-4.0 vue 生命周期：
-		beforeCarete
-		created
-		beforemount
-		mounted
-		beforeupdate
-		updated
-		beforedistroy
-		distroyed
-	小程序也有生命周期：
-		微信：
-			小程序：
-				onLauch: 当小程序加载时执行
-				onShow: 当小程序显示时执行
-			页面：
-				onLoad: 页面加载时执行
-				onReady: 当页面渲染时执行
-				onShow: 当页面显示时执行
-				onHide: 当页面隐藏时执行
-				ohUnload: 当页面卸载时执行
-5.0 商品详情：
-	5.1 设置入口
-	5.2 创建页面
-	5.3 书写静态页面
-	5.4 渲染动态数据
-	5.5 分享
-		两种方式：
-			直接调用： wx.showShareMenu()
-				效果：在小程序的三点中可以找到分享选项
-			使用 button 来进行分享： <button open-type="share">分享</button>
-6.0 在项目中使用阿里字体图标
-	6.1 进入阿里巴巴字体图标网站： https://www.iconfont.cn/
-	6.2 登录
-	6.3 进入我的项目：图标管理 ---》 我的项目
-	6.4 添加一个新项目：输入项目相当信息
-	6.5 将选择好的图标添加到项目中
-	6.6 选择 font class 生成代码
-	6.7 在浏览器中打开这个连接，得到生成的字体 css 代码
-7.0 搜索
-	7.1 设置入口
-	7.2 创建页面
-	7.3 书写静态页面
-	7.4 渲染动态数据
-	7.5 当输入框中输入内容时，需要将取消按钮显示出来
+    a. 详情页面
+    b. 完成了 搜索页面的静态结构
+    c. 完成 搜索页面的功能
+        c1. 搜索商品
+        c2. 将搜索的历史记录保存起来
+        c3. 将重复的选项从记录中删除
+        c4. 清除所有的搜索记录
+        c5. 联想功能
+    d. 完成购物车页面
+2.0 完成搜索页面：
+    a. 搜索商品：
+        1.0 输入内容，点击回车
+            在 小程序中 为输入框准备了很多的事件：点击完成的事件 bindconfirm
+        2.0 从搜索页面跳转到搜索列表
+    b. 将搜索的历史记录保存起来
+        1.0 每次搜索时得到搜索内容
+        2.0 将 搜索信息 保存到 Localstroage 中   Localstroage.setItem Localstroage.getItem Localstroage.removeIte()
+        3.0 每当打开 搜索 页面将数据加载出来
+    c. 将重复的选项从记录中删除
+    d. 清除所有的搜索记录
+        1.0 给叉叉设置一个点击事件：
+        2.0 将 searchList 数组清空，还要将 storage 中的内容也进行清空
+    e. 联想功能
+        0.0 完成将联想数据显示样式
+        1.0 监听输入框中输入的内容（每次输入不同的内容都要进行联想）
+        2.0 利用输入的关键字，去服务器中找到与这个关键字相匹配的数据
+        3.0 将这些数据渲染到页面上 
+3.0 小程序中的跳转
+    声明式导航：
+         <navigator url=""></navigator>
+    编程式导航
+        wx.switchTab(obj) 
+            跳转到 tabBar 页面
+        wx.reLaunch(obj) 
+            关闭所有页面，打开到应用内的某个页面
+        wx.redirectTo(obj)
+            关闭当前页面，跳转到应用内的某个页面
+        wx.navigateTo(obj)
+            保留当前页面，跳转到应用内的某个页面
+        wx.navigateBack(obj)
+            关闭当前页面，返回上一页面
+4.0 小程序中的数据保存：
+    stroage：
+        存储：
+            异步：
+                wx.setStorage({key: '', data: ''})
+            同步：
+                wx.setStorageSync('key', 'value')
+        获取：
+            异步：
+                wx.getStorage({
+                    key: '',
+                    success: function(res) {
+                        res 
+                    }
+                })
+            同步：
+                var res = wx.getStorageSync('key')
+        清除：
+            wx.clearStorage：会清除当前项目中所有的 storage 
+            wx.removeStorage: 清除指定 key 对应的 storage
+5.0 数组中的去重： Set 对象

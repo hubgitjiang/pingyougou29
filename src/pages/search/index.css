@@ -20,6 +20,27 @@
   top: 10rpx;
   left: 10rpx;
 }
+.search .search-input .think {
+  position: absolute;
+  top: 60rpx;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 18px;
+  color: #999;
+  padding-left: 40rpx;
+  box-sizing: border-box;
+  line-height: 50rpx;
+}
+.search .search-input .think .item {
+  overflow: hidden;
+  /*超出部分隐藏*/
+  white-space: nowrap;
+  /*不换行*/
+  text-overflow: ellipsis;
+  /*超出部分文字以...显示*/
+}
 .search .mybtn {
   margin-left: 30rpx;
   width: 158rpx;
