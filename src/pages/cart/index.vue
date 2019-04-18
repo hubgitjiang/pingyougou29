@@ -32,7 +32,7 @@
         <span class="iconfont iconGroup-"></span>优购生活馆</div>
       <div class="item" v-for="(value, key) in goodsList" :key="key">
         <div class="check">
-          <icon type="success" size="20" color="red"></icon>
+          <icon type="success" @click="select(value)" size="20" :color="value.selected ? 'red': 'gray'"></icon>
         </div>
         <div class="goods">
           <div class="left">
@@ -45,9 +45,9 @@
             <div class="pricenum">
               <div class="price">￥{{ value.goods_price }}</div>
               <div class="num">
-                <span>-</span>
-                <span class="index">3</span>
-                <span>+</span>
+                <span @click="sub(value)">-</span>
+                <span class="index">{{ value.num }}</span>
+                <span @click="add(value)">+</span>
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@
     </div>
     <div class="total">
       <div class="check">
-        <icon type="success" size="20" color="red"></icon>
+        <icon type="success" @click="selectAll" size="20" :color="sAll?'red': 'gray'"></icon>
       </div>
       <div class="word">全选</div>
       <div class="totalp">
@@ -69,13 +69,16 @@
         </div>
       </div>
       <div class="pay">
-        <button>结算</button>
+        <button @click="jiesuan">结算({{ totalCount }})</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+// 引入 request
+import request from '../../utils/request.js'
+
 export default {
   data() {
     return {
@@ -99,6 +102,111 @@ export default {
           }
         }
       })
+    },
+    // 用来选中商品
+    select(value) {
+      // 修改商品的选中状态
+      value.selected = !value.selected
+      // 重新将 goodsList 存入到 storage 中
+      try {
+        wx.setStorageSync('goods', this.goodsList)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    // 点击以后可以让商品数据加一
+    add(value) {
+      value.num++
+      // 将修改后的数据重新保存起来
+      try {
+        wx.setStorageSync('goods', this.goodsList)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    // 点击以后可以让商品数据减一
+    sub(value) {
+      value.num--
+      // 判断：如果数字为 0 ，需要访问用户是否要删除数据，如果是确定，就是删除，如果是取消，就将数据重新设置为1
+      if (value.num === 0) {
+        wx.showModal({
+          title: '警告',
+          content: '是否删除数据',
+          success: res => {
+            if (res.confirm) {
+              // 将数据从 goods 中清除 delete this.goodsList[value.goods.id]
+              delete this.goodsList[value.goods_id]
+              // 将数据更新到 storage 中
+              wx.setStorageSync('goods', this.goodsList)
+              // // 重新给 this.goodsList
+              // this.goodsList = wx.getStorageSync('goods')
+              this.goodsList = { ...this.goodsList }
+            } else if (res.cancel) {
+              value.num = 1
+              try {
+                wx.setStorageSync('goods', this.goodsList)
+              } catch (error) {
+                console.log(error)
+              }
+            }
+          }
+        })
+      }
+    },
+    selectAll() {
+      // 让所有的选项状态与当前这个全选一致
+      // 将当请求状态保存起来
+      var select = !this.sAll
+      // 依次给每个元素设置状态
+      Object.keys(this.goodsList).forEach(v => {
+        this.goodsList[v].selected = select
+      })
+    },
+    // 点击结算按钮，将商品数据提交到服务器中
+    async jiesuan() {
+      var url = 'https://itjustfun.cn/api/public/v1/my/orders/create'
+      // 创建一个订单对象：
+      var orderObj = {
+        // order_price: '',
+        // consignee_addr: '',
+        // order_detail: '[]',
+        // goods: ''
+      }
+      // 设置订单对象的总价
+      orderObj.order_price = this.totalPrice
+      // 设置订单对象的地址
+      orderObj.consignee_addr = this.detailAddree
+      // 设置订单对象的详情
+      var orderList = []
+      // 设置订单对象的 goods属性
+      var goods = []
+      Object.keys(this.goodsList).forEach(v => {
+        var obj = this.goodsList[v]
+        // 判断是否选中
+        if (obj.selected) {
+          // 创建 order_detail
+          var orderItem = {}
+          orderItem.goods_id = obj.goods_id
+          orderItem.goods_name = obj.goods_name
+          orderItem.goods_price = obj.goods_price
+          orderItem.goods_small_logo = obj.goods_small_logo
+          orderItem.counts = obj.num
+          orderItem.selectStatus = obj.selected
+          orderList.push(orderItem)
+          // 创建 goods
+          var goodsObj = {}
+          goodsObj.goods_id = obj.goods_id
+          goodsObj.goods_number = obj.goods_number
+          goodsObj.goods_price = obj.goods_price
+          goods.push(goodsObj)
+        }
+      })
+      orderObj.order_detail = JSON.stringify(orderList)
+      orderObj.goods = goods
+      console.log(orderObj)
+      // 将参数提交到服务器
+      var res = await request.post(url, orderObj)
+      console.log(res)
     }
   },
   computed: {
@@ -113,10 +221,34 @@ export default {
       // 定义一个和
       var sum = 0
       // 遍历一个对象
-      Object.keys(this.goodsList).forEach(v=> {
-        sum += this.goodsList[v].goods_price
+      Object.keys(this.goodsList).forEach(v => {
+        // 先判断当前的商品是否选中
+        if (this.goodsList[v].selected) {
+          sum += this.goodsList[v].goods_price * this.goodsList[v].num
+        }
       })
       return sum
+    },
+    totalCount: function() {
+      var index = 0;
+      Object.keys(this.goodsList).forEach(v => {
+        if (this.goodsList[v].selected) {
+          index++
+        }
+      })
+      return index
+    },
+    // 设置一个全选状态：
+    sAll: function() {
+      // 得到选中的状态：只要在一个元素没有被选中，就应该为不选中，如果所有的都选中，则选中
+      var bool = true
+      Object.keys(this.goodsList).forEach(v => {
+        if (!this.goodsList[v].selected) {
+          bool = false
+          return
+        }
+      })
+      return bool
     }
   },
   onShow() {

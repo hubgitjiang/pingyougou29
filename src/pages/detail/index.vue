@@ -67,7 +67,9 @@ export default {
     },
     // 加入购物车的方法
     addCart() {
-      // console.log(this.detailObj)
+      // 给购物车中的商品添加一个选中状态以及商品数量
+      this.detailObj.selected = true
+      this.detailObj.num = 1
       // 将当前商品信息保存起
       this.goodsList[this.detailObj.goods_id] = this.detailObj
       // 存储到 storage 中

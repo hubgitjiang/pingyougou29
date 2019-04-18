@@ -1,77 +1,30 @@
-1.0 今日内容：
-    a. 详情页面
-    b. 完成了 搜索页面的静态结构
-    c. 完成 搜索页面的功能
-        c1. 搜索商品
-        c2. 将搜索的历史记录保存起来
-        c3. 将重复的选项从记录中删除
-        c4. 清除所有的搜索记录
-        c5. 联想功能
-    d. 完成购物车页面
-2.0 完成搜索页面：
-    a. 搜索商品：
-        1.0 输入内容，点击回车
-            在 小程序中 为输入框准备了很多的事件：点击完成的事件 bindconfirm
-        2.0 从搜索页面跳转到搜索列表
-    b. 将搜索的历史记录保存起来
-        1.0 每次搜索时得到搜索内容
-        2.0 将 搜索信息 保存到 Localstroage 中   Localstroage.setItem Localstroage.getItem Localstroage.removeIte()
-        3.0 每当打开 搜索 页面将数据加载出来
-    c. 将重复的选项从记录中删除
-    d. 清除所有的搜索记录
-        1.0 给叉叉设置一个点击事件：
-        2.0 将 searchList 数组清空，还要将 storage 中的内容也进行清空
-    e. 联想功能
-        0.0 完成将联想数据显示样式
-        1.0 监听输入框中输入的内容（每次输入不同的内容都要进行联想）
-        2.0 利用输入的关键字，去服务器中找到与这个关键字相匹配的数据
-        3.0 将这些数据渲染到页面上 
-3.0 小程序中的跳转
-    声明式导航：
-         <navigator url=""></navigator>
-    编程式导航
-        wx.switchTab(obj) 
-            跳转到 tabBar 页面
-        wx.reLaunch(obj) 
-            关闭所有页面，打开到应用内的某个页面
-        wx.redirectTo(obj)
-            关闭当前页面，跳转到应用内的某个页面
-        wx.navigateTo(obj)
-            保留当前页面，跳转到应用内的某个页面
-        wx.navigateBack(obj)
-            关闭当前页面，返回上一页面
-4.0 小程序中的数据保存：
-    stroage：
-        存储：
-            异步：
-                wx.setStorage({key: '', data: ''})
-            同步：
-                wx.setStorageSync('key', 'value')
-        获取：
-            异步：
-                wx.getStorage({
-                    key: '',
-                    success: function(res) {
-                        res 
-                    }
-                })
-            同步：
-                var res = wx.getStorageSync('key')
-        清除：
-            wx.clearStorage：会清除当前项目中所有的 storage 
-            wx.removeStorage: 清除指定 key 对应的 storage
-5.0 数组中的去重： Set 对象
-6.0 购物车：
-    a. 设置一个入口位置
-    b. 完成静态页面
-    c. 选择收货地址
-        将收货地址相信息保存起来：wx.setStorageSync
-    d. 加入购物车
-        点击加入购物车按钮，将数据保存到一个位置：
-            stroage:
-            服务器：
-        d1. 当点击加入购物车时，将商品信息保存到 storage 中，
-        d2. 将来在购物车页面中再去 storage 中取出
-    e. 计算所有商品的总价格
+1.0 今日内容
+    a. 完成购物车
+        a1. 点击选择购物车中的商品
+        a2. 点击加减按钮可以动态修改商品数据
+        a3. 点击全选改变所有商品的状态
+        a4. 设置结算后面的数量
+        a5. 重新计算总价
+        a6. 完成结算功能
+    b. 完成订单页面
+2.0 完成购物车
+    a. 点击选择购物车中的商品
+        1.0 必须先给购物车中的所有数据添加一个选中状态，还需要一个商品数据
+    b. 点击加减按钮可以动态修改商品数据
+        1.0 给按钮绑定点击事件
+        2.0 在点击事件中修改数据
+    c. 点击全选改变所有商品的状态
+    d. 设置结算后面的数量
+    e. 重新计算总价
+    f. 完成结算功能
+        1.0 点击结算按钮，将数据提交到服务器，去生成一个订单
+            url: https://itjustfun.cn/api/public/v1/my/orders/create
+            方式： post
+            参数：
+                order_price         订单价格
+                consignee_addr      订单地址
+                order_detail        订单详情
+                goods               商品详情
 
-7.0 小程序中允许开发人员直接获取微信中的地址
+
+

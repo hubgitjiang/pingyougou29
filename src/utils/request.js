@@ -27,5 +27,10 @@ request.get = function (url, data) {
     return request(url, "get", data, {})
 }
 
+// 扩展一个 post 方法
+request.post = function(url, data) {
+    return request(url, "post", data, {})
+}
+
 // 暴露方法
 export default request
