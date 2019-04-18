@@ -17,7 +17,7 @@
     </div>
     <!-- 商品列表 -->
     <div class="goodsList" :style="{marginTop: margintop}">
-      <a :href="'/pages/detail/main?id=' + item.goods_id" class="item" v-for="(item, index) in goodsList" :key="index">
+      <a :href="'/pages/goods_detail/main?id=' + item.goods_id" class="item" v-for="(item, index) in goodsList" :key="index">
         <div class="box">
           <div class="left">
             <image :src="item.goods_small_logo"></image>

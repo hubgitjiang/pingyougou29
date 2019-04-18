@@ -32,5 +32,9 @@ request.post = function(url, data) {
     return request(url, "post", data, {})
 }
 
+// 扩展一个方法：用来添加请求头
+request.auth = function(url, data, header) {
+    return request(url, 'post', data, header)
+}
 // 暴露方法
 export default request

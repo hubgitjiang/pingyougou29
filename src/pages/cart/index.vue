@@ -162,15 +162,9 @@ export default {
         this.goodsList[v].selected = select
       })
     },
-    // 点击结算按钮，将商品数据提交到服务器中
-    async jiesuan() {
-      var url = 'https://itjustfun.cn/api/public/v1/my/orders/create'
+    setOrder() {
       // 创建一个订单对象：
       var orderObj = {
-        // order_price: '',
-        // consignee_addr: '',
-        // order_detail: '[]',
-        // goods: ''
       }
       // 设置订单对象的总价
       orderObj.order_price = this.totalPrice
@@ -203,10 +197,41 @@ export default {
       })
       orderObj.order_detail = JSON.stringify(orderList)
       orderObj.goods = goods
-      console.log(orderObj)
+      return orderObj
+    },
+    // 点击结算按钮，将商品数据提交到服务器中
+    async jiesuan() {
+      var url = 'https://itjustfun.cn/api/public/v1/my/orders/create'
+      var orderObj = this.setOrder()
+      // 验证用户是否登录：登录的令牌会放到 straoge 中
+      var token = wx.getStorageSync('token')
+      // 判断
+      if (!token) {
+        wx.showToast({
+          title: '您还没有登录，马上进入登录页面',
+          icon: 'none',
+          duration: 2000
+        })
+        setTimeout(function() {
+          // 跳转到登录页面
+          wx.navigateTo({
+            url: '/pages/login/main'
+          })
+        }, 1000)
+        return
+      }
       // 将参数提交到服务器
-      var res = await request.post(url, orderObj)
-      console.log(res)
+      var res = await request.auth(url, orderObj, {
+        Authorization: wx.getStorageSync('token')
+      })
+      // 将订单编号保存起来
+      var number = res.data.data.order_number
+      // 保存到 storage 中
+      wx.setStorageSync('number', number)
+      // 跳转到订单页面
+      wx.navigateTo({
+        url: '/pages/order/main'
+      })
     }
   },
   computed: {

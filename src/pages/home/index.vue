@@ -6,7 +6,9 @@
     <swiper class="loop" circular indicator-dots autoplay>
       <block v-for="(item, index) in imgList" :key="index">
         <swiper-item>
-          <image :src="item.image_src" mode="aspectFill" />
+          <a :href="item.navigator_url">
+            <image :src="item.image_src" mode="aspectFill" />
+          </a>
         </swiper-item>
       </block>
     </swiper>
@@ -23,10 +25,14 @@
       </div>
       <div class="content">
         <div class="left">
-          <image :src="item.product_list[0].image_src" mode="aspectFit"></image>
+          <a :href="'/pages/searchlist/main?query=' + item.product_list[0].name">
+            <image :src="item.product_list[0].image_src" mode="aspectFit"></image>
+          </a>
         </div>
         <div class="right">
-          <image v-if="subindex != 0" v-for="(subitem, subindex) in item.product_list" :key="subindex" :src="subitem.image_src" mode="aspectFit"></image>
+          <a v-if="subindex != 0" :href="'/pages/searchlist/main?query=' + subitem.name" v-for="(subitem, subindex) in item.product_list" :key="subindex">
+            <image :src="subitem.image_src" mode="aspectFit"></image>
+          </a>
         </div>
       </div>
     </div>
@@ -49,26 +55,41 @@ export default {
   },
   // 请求页面中的数据
   async mounted() {
-    // 发送请求：请求轮播图的数据
-    var url1 = "https://itjustfun.cn/api/public/v1/home/swiperdata"
-    var reslunbo = await request(url1)
-    // 解构赋值
-    var { data } = reslunbo.data
-    this.imgList = data
+    this.getData()
+  },
+  methods: {
+    async getData() {
 
-    // 发送请求：请求分类选项数据
-    var url2= "https://itjustfun.cn/api/public/v1/home/catitems"
-    var resCate = await request(url2)
-    this.cateList = resCate.data.data
+      // 重新请求轮播图，分类选项，楼层数据
+      // 发送请求：请求轮播图的数据
+      var url1 = "https://itjustfun.cn/api/public/v1/home/swiperdata"
+      var reslunbo = await request(url1)
+      // 解构赋值
+      var { data } = reslunbo.data
+      this.imgList = data
+      // 遍历这里的数据给每一个路径添加一个 main : /pages/goods_detail?goods_id=55578
+      this.imgList.forEach(v => {
+        v.navigator_url = '/pages/goods_detail/main?id=' + v.navigator_url.split('=')[1]
+      })
 
-    // 发送请求：请求楼层数据
-    var url3 = "https://itjustfun.cn/api/public/v1/home/floordata"
-    var resFloor = await request(url3)
-    this.floorList = resFloor.data.data
-    console.log(this.floorList)
+      // 发送请求：请求分类选项数据
+      var url2 = "https://itjustfun.cn/api/public/v1/home/catitems"
+      var resCate = await request(url2)
+      this.cateList = resCate.data.data
+
+      // 发送请求：请求楼层数据
+      var url3 = "https://itjustfun.cn/api/public/v1/home/floordata"
+      var resFloor = await request(url3)
+      this.floorList = resFloor.data.data
+      console.log(this.floorList)
+    }
   },
   components: {
     tophead
+  },
+  onPullDownRefresh() {
+    this.getData()
+    wx.stopPullDownRefresh()
   }
 }
 </script>

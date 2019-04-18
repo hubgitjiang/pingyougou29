@@ -17,6 +17,8 @@
     d. 设置结算后面的数量
     e. 重新计算总价
     f. 完成结算功能
+        0.0 验证用户是否登录，如果登录直接发送请求，如果没有登录，跳转到登录页面
+            
         1.0 点击结算按钮，将数据提交到服务器，去生成一个订单
             url: https://itjustfun.cn/api/public/v1/my/orders/create
             方式： post
@@ -25,6 +27,28 @@
                 consignee_addr      订单地址
                 order_detail        订单详情
                 goods               商品详情
-
-
+        2.0 无效的 token:
+            什么 token:
+                当客户端登录到服务器后，服务器会根据不同的客户端返回一个登录令牌（表达当前客户端已经登录） token,如果有 token 说明已经登录过，如果没有 token 说明需要登录
+        3.0 添加一个登录页面，进行登录
+                API: https://itjustfun.cn/api/public/v1/users/wxlogin
+                方式： post
+                参数：
+        4.0 继续生成订单
+    g. 完成了订单支付页面
+        1.0 结构样式
+        2.0 渲染了数据
+        3.0 支付：判断当前订单是否支付
+            API：https://itjustfun.cn/api/public/v1/my/orders/chkOrder
+            方式：POST
+            参数：
+                { "order_number": "GD20180507000000000050" }
+        4.0 请求支付页面
+            API：https://itjustfun.cn/api/public/v1/my/orders/req_unifiedorder
+            方式：POST
+            参数：
+                { "order_number": "GD20180507000000000050" }
+            会返回： wxorder: 可以用来发起微信支付
+        5.0 根据 wxorder 来发起支付
+        
 
